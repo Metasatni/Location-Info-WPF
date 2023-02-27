@@ -7,7 +7,9 @@ namespace Location_Info.ViewModels
 {
     class ChartVM : ViewModel
     {
-        public SeriesCollection SeriesCollection { get; set; }
+        public SeriesCollection TemperatureCollection { get; set; }
+        public SeriesCollection SnowingChancesCollection { get; set; }
+        public SeriesCollection RainingChancesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
 
@@ -24,7 +26,32 @@ namespace Location_Info.ViewModels
                     }
                 }
 
-                SeriesCollection = new SeriesCollection
+                double[][] snowing = new double[7][];
+
+                for (var i = 0; i < ForecastDays.Count; i++)
+                {
+                    snowing[i] = new double[24];
+                    for (var j = 0; j < ForecastDays[i].Hours.Count; j++)
+                    {
+                        snowing[i][j] = ForecastDays[i].Hours[j].Snowing;
+                    }
+                }
+
+                double[][] raining = new double[7][];
+
+                for (var i = 0; i < ForecastDays.Count; i++)
+                {
+                    raining[i] = new double[24];
+                    for (var j = 0; j < ForecastDays[i].Hours.Count; j++)
+                    {
+                        raining[i][j] = ForecastDays[i].Hours[j].Raining;
+                    }
+                }
+
+
+                
+
+                TemperatureCollection = new SeriesCollection
                 {
                     new LineSeries
                     { Title = ForecastDays[0].Date, Values = new ChartValues < double >(temperatures[0]) },
@@ -33,6 +60,25 @@ namespace Location_Info.ViewModels
                     new LineSeries
                     { Title = ForecastDays[2].Date, Values = new ChartValues < double >(temperatures[2]) }
                 };
+                SnowingChancesCollection = new SeriesCollection
+                {
+                    new LineSeries
+                    { Title = ForecastDays[0].Date, Values = new ChartValues < double >(snowing[0]) },
+                    new LineSeries
+                    { Title = ForecastDays[1].Date, Values = new ChartValues < double >(snowing[1]) },
+                    new LineSeries
+                    { Title = ForecastDays[2].Date, Values = new ChartValues < double >(snowing[2]) }
+                };
+                RainingChancesCollection = new SeriesCollection
+                {
+                    new LineSeries
+                    { Title = ForecastDays[0].Date, Values = new ChartValues < double >(raining[0]) },
+                    new LineSeries
+                    { Title = ForecastDays[1].Date, Values = new ChartValues < double >(raining[1]) },
+                    new LineSeries
+                    { Title = ForecastDays[2].Date, Values = new ChartValues < double >(raining[2]) }
+                };
+
 
                 Labels = new[] {
                     "12 PM","01 AM","02 AM","03 AM","04 AM","05 AM","06 AM","07 AM","08 AM","09 AM","10 AM","11 AM","12 AM"

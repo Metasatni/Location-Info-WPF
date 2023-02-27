@@ -13,12 +13,16 @@ namespace Location_Info.ViewModels
         public double TempC { get; set; }
         public double WindKPH { get; set; }
         public double FeelsLikeC { get; set; }
+        public double Snowing { get; set; }
+        public double Raining { get; set; }
 
         public HourVM(Hour Hour) {
             this.Hour = Hour.Time.Split(' ')[1];
             this.TempC = Hour.TempC;
             this.WindKPH = Hour.WindKph;
             this.FeelsLikeC = Hour.FeelslikeC;
+            this.Snowing = Hour.ChanceOfSnow;
+            this.Raining = Hour.ChanceOfRain;
         }
 
     }

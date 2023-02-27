@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using MahApps.Metro.Controls;
+using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Windows;
+using System.Windows.Controls;
 using static Location_Info.Objects.ForecastObject;
 using static Location_Info.Objects.WeatherObject;
 
@@ -25,9 +27,9 @@ namespace Location_Info.ViewModels
 
             WeatherApiAsync(Name,response);
             ForecastApiAsync(Name);
+            
 
         }
-
         private async void WeatherApiAsync(string Name, string response)
         {
             var rootweather = JsonConvert.DeserializeObject<RootWeather>(response);
@@ -55,12 +57,7 @@ namespace Location_Info.ViewModels
             }
             catch (Exception ex)
             {
-                Close();
             }
-        }
-        private void Close()
-        {
-            this.Close();
         }
     }
 }
