@@ -43,19 +43,14 @@
                         <TextBlock TextAlignment="Center" Text="Wind (kph)"/>
                         <TextBlock Margin="0,10,0,0" FontSize="16" TextAlignment="Center" Text="{Binding WeatherInfoVM.Pressure}"/>
                         <TextBlock TextAlignment="Center" Text="Pressure (mb)"/>
+                        <Image Source="{Binding WeatherInfoVM.CountryFlag}" Height="100" Width="100"/>
                     </StackPanel>
                 </Grid>
             </Border>
 
                 <!-- Weather Forecast -->
             <Label Content="Weather Forecast" FontSize="24" HorizontalAlignment="Center" Grid.ColumnSpan="2" />
-            <Expander Grid.Row="0">
-                <Expander.Header>
-                    <DockPanel VerticalAlignment="Stretch">
-                        <TextBlock FontStyle="Italic" Foreground="Black">Forecast</TextBlock>
-                    </DockPanel>
-                </Expander.Header>
-
+            
                 <Border Background="#E7E7E7" Margin="50, 10" BorderThickness="1" BorderBrush="Black" CornerRadius="8" Padding="10">
                     <StackPanel>
                         <Grid>
@@ -66,17 +61,12 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <!-- FORECAST CHART VIEW -->
 
-                            <Expander Grid.Row="1" >
-                                <Expander.Header>
-                                    <DockPanel VerticalAlignment="Stretch">
-                                        <TextBlock FontStyle="Italic" Foreground="Black">Temperature forecast</TextBlock>
-                                    </DockPanel>
-                                </Expander.Header>
-
-                                <lvc:CartesianChart Height="300" Series="{Binding ChartVM.TemperatureCollection}" LegendLocation="Right" >
+                          
+                                <lvc:CartesianChart Grid.Row="1" Height="300" Series="{Binding ChartVM.TemperatureCollection}" LegendLocation="Right" >
                                     <lvc:CartesianChart.AxisY>
                                         <lvc:Axis Title="Temperature" LabelFormatter="{Binding ChartVM.YFormatter}"></lvc:Axis>
                                     </lvc:CartesianChart.AxisY>
@@ -85,18 +75,7 @@
                                     </lvc:CartesianChart.AxisX>
                                 </lvc:CartesianChart>
 
-                            </Expander>
-
-
-                            <Expander Grid.Row="2" >
-                                <Expander.Header>
-                                    <DockPanel VerticalAlignment="Stretch">
-                                        <TextBlock FontStyle="Italic" Foreground="Black">Snowing chances forecast</TextBlock>
-                                    </DockPanel>
-                                </Expander.Header>
-
-
-                                <lvc:CartesianChart Height="300" Series="{Binding ChartVM.SnowingChancesCollection}" LegendLocation="Right" >
+                                <lvc:CartesianChart Grid.Row="2" Height="300" Series="{Binding ChartVM.SnowingChancesCollection}" LegendLocation="Right" >
                                     <lvc:CartesianChart.AxisY>
                                         <lvc:Axis Title="Snowing Chances" LabelFormatter="{Binding ChartVM.YFormatter}"></lvc:Axis>
                                     </lvc:CartesianChart.AxisY>
@@ -105,19 +84,8 @@
                                     </lvc:CartesianChart.AxisX>
                                 </lvc:CartesianChart>
 
-                            </Expander>
-
-
-
-                            <Expander Grid.Row="3" >
-                                <Expander.Header>
-                                    <DockPanel VerticalAlignment="Stretch">
-                                        <TextBlock FontStyle="Italic" Foreground="Black">Raining chances forecast</TextBlock>
-                                    </DockPanel>
-                                </Expander.Header>
-
-
-                                <lvc:CartesianChart Height="300" Series="{Binding ChartVM.RainingChancesCollection}" LegendLocation="Right" >
+                      
+                                <lvc:CartesianChart Grid.Row="3"  Height="300" Series="{Binding ChartVM.RainingChancesCollection}" LegendLocation="Right" >
                                     <lvc:CartesianChart.AxisY>
                                         <lvc:Axis Title="Raining Chances" LabelFormatter="{Binding ChartVM.YFormatter}"></lvc:Axis>
                                     </lvc:CartesianChart.AxisY>
@@ -125,9 +93,6 @@
                                         <lvc:Axis Title="Hour" Labels="{Binding ChartVM.Labels}"></lvc:Axis>
                                     </lvc:CartesianChart.AxisX>
                                 </lvc:CartesianChart>
-                            </Expander>
-
-
                             <!-- FORECAST CHART VIEW-->
                             <!-- FORECAST DATE VIEW -->
                             <ListView Grid.Row="4" SelectedIndex="0" ItemsSource="{Binding ForecastDays}"
@@ -144,7 +109,7 @@
                             </ListView>
                             <!-- FORECAST DATE VIEW -->
                             <!-- FORECAST TABLE -->
-                            <DataGrid Grid.Row="4" Background="#E7E7E7" AlternatingRowBackground="#A6A6A6" RowBackground="#C8C8C8" IsReadOnly="true" ItemsSource="{Binding Source={x:Reference Name=lsvForecastDays}, Path=SelectedItem.Hours}"
+                            <DataGrid Grid.Row="5" Background="#E7E7E7" AlternatingRowBackground="#A6A6A6" RowBackground="#C8C8C8" IsReadOnly="true" ItemsSource="{Binding Source={x:Reference Name=lsvForecastDays}, Path=SelectedItem.Hours}"
                               MaxHeight="120" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Binding="{Binding Hour}" Header="Time"/>
@@ -157,7 +122,6 @@
                         </Grid>
                     </StackPanel>
                 </Border>
-            </Expander>
         </StackPanel>
     </ScrollViewer>
 </Window>
