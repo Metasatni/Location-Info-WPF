@@ -1,17 +1,8 @@
-﻿using Location_Info.Objects;
-using Location_Info.ViewModels;
-using Newtonsoft.Json;
+﻿using Location_Info.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
-using static Location_Info.Objects.WeatherObject;
 
 namespace Location_Info
 {
