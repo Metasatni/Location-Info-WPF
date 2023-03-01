@@ -6,9 +6,6 @@
         xmlns:local="clr-namespace:Location_Info"
         mc:Ignorable="d"
         Title="Location Info" Height="170" Width="350">
-    <Window.DataContext>
-        <local:MainWindowVM/>
-    </Window.DataContext>
     <Grid Margin="20" >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

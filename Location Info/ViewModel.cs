@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Location_Info;
 
-internal class ViewModel : INotifyPropertyChanged {
+public class ViewModel : INotifyPropertyChanged {
 
   public event PropertyChangedEventHandler? PropertyChanged;
 

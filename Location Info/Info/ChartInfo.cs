@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace Location_Info.ViewModels
 {
-    class ChartVM : ViewModel
+    public class ChartInfo
     {
         public SeriesCollection TemperatureCollection { get; set; }
         public SeriesCollection SnowingChancesCollection { get; set; }
@@ -13,7 +13,7 @@ namespace Location_Info.ViewModels
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
 
-        public ChartVM(ObservableCollection<ForecastDayVM> ForecastDays)
+        public ChartInfo(ObservableCollection<ForecastInfo> ForecastDays)
         {
                 double[][] temperatures = new double[7][];
 
@@ -48,9 +48,6 @@ namespace Location_Info.ViewModels
                     }
                 }
 
-
-                
-
                 TemperatureCollection = new SeriesCollection
                 {
                     new LineSeries
@@ -79,13 +76,10 @@ namespace Location_Info.ViewModels
                     { Title = ForecastDays[2].Date, Values = new ChartValues < double >(raining[2]) }
                 };
 
-
                 Labels = new[] {
                     "12 PM","01 AM","02 AM","03 AM","04 AM","05 AM","06 AM","07 AM","08 AM","09 AM","10 AM","11 AM","12 AM"
                     ,"01 PM","02 PM","03 PM","04 PM","05 PM","06 PM","07 PM","08 PM","09 PM","10 PM","11 PM",};
                 YFormatter = value => value.ToString();
-                OnPropertyChanged(nameof(SeriesCollection));
-
         }
     }
 }

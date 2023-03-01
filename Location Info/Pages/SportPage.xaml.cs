@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace Location_Info.ViewModels
 {
     /// <summary>
-    /// Interaction logic for Weather.xaml
+    /// Interaction logic for Sport.xaml
     /// </summary>
-    public partial class Weather : Page
+    public partial class SportPage : Page
     {
-        public Weather(string Name, string response)
+        public SportPage(string Country)
         {
             InitializeComponent();
-            var VM = new WeatherVM(Name, response);
+            var VM = new SportPageVM(Country);
             this.DataContext= VM;
 
         }

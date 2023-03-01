@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 using static Location_Info.Objects.WeatherObject;
 
 namespace Location_Info.ViewModels
 {
-    internal class WeatherInfoVM
+    public class WeatherInfo
     {
         public string Name { get; set; }
         public string Country { get; set; }
@@ -19,7 +14,7 @@ namespace Location_Info.ViewModels
         public ImageSource Icon { get; set; }
         public ImageSource CountryFlag { get; set; }
 
-        public WeatherInfoVM(RootWeather weather)
+        public WeatherInfo(RootWeather weather)
         {
             var converter = new ImageSourceConverter();
             this.Name = weather.Location.Name;

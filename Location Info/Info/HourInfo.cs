@@ -7,7 +7,7 @@ using static Location_Info.Objects.ForecastObject;
 
 namespace Location_Info.ViewModels
 {
-    internal class HourVM
+    public class HourInfo
     {
         public string Hour {  get; set; }
         public double TempC { get; set; }
@@ -16,7 +16,7 @@ namespace Location_Info.ViewModels
         public double Snowing { get; set; }
         public double Raining { get; set; }
 
-        public HourVM(Hour Hour) {
+        public HourInfo(Hour Hour) {
             this.Hour = Hour.Time.Split(' ')[1];
             this.TempC = Hour.TempC;
             this.WindKPH = Hour.WindKph;

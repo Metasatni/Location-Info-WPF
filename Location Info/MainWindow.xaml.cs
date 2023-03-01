@@ -20,9 +20,10 @@ namespace Location_Info
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainWindowVM mainWindowVM)
         {
             InitializeComponent();
+            this.DataContext = mainWindowVM;
         }
     }
 }

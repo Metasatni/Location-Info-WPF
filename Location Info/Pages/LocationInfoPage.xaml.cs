@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Location_Info.Services;
+using System.Windows;
 
 namespace Location_Info.ViewModels
 {
@@ -11,21 +12,22 @@ namespace Location_Info.ViewModels
         Weather,
         ESport,
     }
-    public partial class LocationInfo : Window
+    public partial class LocationInfoPage : Window
     {
-        private Weather _weather { get; set; }
-        public LocationInfo()
-        {
-            InitializeComponent();
-        }
 
-        public LocationInfo(string Name, string response)
+        private WeatherApiService _weatherApiService;
+        private Database Database => ServiceContainer.GetService<Database>();
+        private SportPage _sport => (_sportField ??= ServiceContainer.GetService<SportPage>());
+        private WeatherPage _weather => (_weatherField ??= ServiceContainer.GetService<WeatherPage>());
+        private WeatherPage _weatherField;
+        private SportPage _sportField;
+        private string _name { get; set; }
+        
+        public LocationInfoPage()
         {
             InitializeComponent();
-            var VM = new LocationInfoVM(Name, response);
-            this.DataContext= VM;
-            _weather = new Weather(Name, response);
             MainFrame.Content = _weather;
+
         }
 
         private void WeatherButton_Click(object sender, RoutedEventArgs e)
@@ -34,8 +36,9 @@ namespace Location_Info.ViewModels
         }
         private void SportButton_Click(object sender, RoutedEventArgs e)
         {
-            if(SportButton.IsEnabled) {CheckButtons(EButtons.ESport); MainFrame.Content = new Sport(); }   
-        }
+            _name = SportButton.Name;
+            if(SportButton.IsEnabled) {CheckButtons(EButtons.ESport);  MainFrame.Content = _sport; }    
+        } 
         private void CheckButtons(EButtons button)
         {
             switch (button)
