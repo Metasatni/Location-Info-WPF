@@ -1,18 +1,12 @@
-﻿using Location_Info.ViewModels;
-using System;
+﻿using Location_Info.Info;
+using Location_Info.ViewModels;
+using Location_Info.Windows;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Location_Info.Pages
 {
@@ -21,15 +15,35 @@ namespace Location_Info.Pages
     /// </summary>
     public partial class EsportPage : Page
     {
+        private Database _database => ServiceContainer.GetService<Database>();
+        private ObservableCollection<EsportInfo> _esportInfo;
+        private EsportPageVM _esportPageVM;
         public EsportPage(EsportPageVM esportPageVM)
         {
             InitializeComponent();
-            this.DataContext = esportPageVM;
+            _esportPageVM = esportPageVM;
+            this.DataContext = _esportPageVM;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            var button = sender as Button;
+            EsportInfo esportInfoBT = button.DataContext as EsportInfo;
+            string name = esportInfoBT.Name;
+            string gamename = esportInfoBT.GameName;
+            ImageSource icon = esportInfoBT.Ico;
+            var esportInfo = _database.EsportInfo;
+            var esportInfoFiltered = esportInfo.Where(info => info.Name == name && info.GameName == gamename).FirstOrDefault();
+            ObservableCollection<PlayerInfo> players = new ObservableCollection<PlayerInfo>(esportInfoFiltered.Players);
 
+            //var esportInfoFiltered = esportInfo.Where(info => info.Name == name && info.GameName == gamename).FirstOrDefault();
+            //ObservableCollection<PlayerInfo> players = new ObservableCollection<PlayerInfo>(esportInfoFiltered); 
+
+
+
+            var playersWindow = new PlayersWindow();
+            playersWindow.DataContext = new PlayersWindowVM(esportInfo, players, name, icon);
+            playersWindow.Show();
         }
     }
 }

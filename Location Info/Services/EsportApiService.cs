@@ -22,7 +22,7 @@ namespace Location_Info.Services
             _apiKey = _database.EsportApiKey; 
             string country = GetCountryCode(Country);
             HttpClient httpClient = new HttpClient();
-            string url = "https://api.pandascore.co/teams?search[location]="+ country +"&sort=acronym&page=1&per_page=50&token="+ _apiKey;
+            string url = "https://api.pandascore.co/teams?search[location]="+ country +"&sort=acronym&page=1&per_page=200&token="+ _apiKey;
             try
             {
                 var response = await httpClient.GetStringAsync(url);

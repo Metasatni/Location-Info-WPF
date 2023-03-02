@@ -1,10 +1,10 @@
-﻿<Window x:Class="Location_Info.ViewModels.LocationInfoPage"
+﻿<Window x:Class="Location_Info.ViewModels.LocationInfoWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:Location_Info.ViewModels"
-        d:DataContext="{d:DesignInstance Type=viewmodels:LocationInfoPageVM}"
+        d:DataContext="{d:DesignInstance Type=viewmodels:LocationInfoWindowVM}"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="Location Info" Height="450" Width="800" WindowState="Maximized"
@@ -28,7 +28,7 @@
                 <StackPanel Margin="50,10,0,10" Grid.Row="0" Orientation="Horizontal">
                     <Button x:Name="WeatherButton" Width="100" Height="35" Content="Weather" Margin="0" IsEnabled="{Binding WeatherButton.IsEnabled, UpdateSourceTrigger=PropertyChanged}" Click="WeatherButton_Click" />
                     <Button x:Name="SportButton" Width="100" Height="35" Content="Sport" Margin="10,0,0,0" IsEnabled="{Binding SportButton.IsEnabled, UpdateSourceTrigger=PropertyChanged}" Click="SportButton_Click" />
-                    <Button x:Name="EsportButton" Width="100" Height="35" Content="People" Margin="10,0,0,0" IsEnabled="{Binding EportButton.IsEnabled, UpdateSourceTrigger=PropertyChanged}" Click="EsportButton_Click" />
+                    <Button x:Name="EsportButton" Width="100" Height="35" Content="E-Sport" Margin="10,0,0,0" IsEnabled="{Binding EportButton.IsEnabled, UpdateSourceTrigger=PropertyChanged}" Click="EsportButton_Click" />
                 </StackPanel>
             </Border>
                     <!--ContentVM-->

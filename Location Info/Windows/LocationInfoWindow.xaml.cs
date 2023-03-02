@@ -14,11 +14,10 @@ namespace Location_Info.ViewModels
         Sport,
         Esport,
     }
-    public partial class LocationInfoPage : Window
+    public partial class LocationInfoWindow : Window
     {
 
         private WeatherApiService _weatherApiService;
-        private Database Database => ServiceContainer.GetService<Database>();
         private SportPage _sport => (_sportField ??= ServiceContainer.GetService<SportPage>());
         private WeatherPage _weather => (_weatherField ??= ServiceContainer.GetService<WeatherPage>());
         private EsportPage _esport => (_esportField ??= ServiceContainer.GetService<EsportPage>());
@@ -27,7 +26,7 @@ namespace Location_Info.ViewModels
         private EsportPage _esportField;
         private string _name { get; set; }
         
-        public LocationInfoPage()
+        public LocationInfoWindow()
         {
             InitializeComponent();
             MainFrame.Content = _weather;

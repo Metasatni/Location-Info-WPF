@@ -1,5 +1,7 @@
-﻿using Location_Info.ViewModels;
+﻿using Location_Info.Info;
+using Location_Info.ViewModels;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace Location_Info
@@ -14,6 +16,8 @@ namespace Location_Info
         public string SportApiKey { get; set; }
         public string EsportApiKey { get; set; }
         public bool SportAutoRequest { get; set; }
+        public ObservableCollection<EsportInfo> EsportInfo { get; set; }
+        public ObservableCollection<PlayerInfo> TeamPlayers { get; set; }
 
     }
 }

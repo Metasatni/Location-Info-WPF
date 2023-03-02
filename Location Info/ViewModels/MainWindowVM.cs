@@ -31,7 +31,7 @@ namespace Location_Info
             _weatherApiService = new WeatherApiService();
             Database.Name = Name;
             var response = _weatherApiService.GetWeather(Name);
-            if(response != null) { LocationInfoPage locationInfoPage = new LocationInfoPage(); locationInfoPage.Show(); }
+            if(response != null) { LocationInfoWindow locationInfoPage = new LocationInfoWindow(); locationInfoPage.Show(); }
         }
     }
 }

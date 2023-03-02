@@ -2,7 +2,7 @@
 
 namespace Location_Info.ViewModels
 {
-    internal class LocationInfoPageVM : ViewModel
+    internal class LocationInfoWindowVM : ViewModel
     {
 
 
@@ -13,7 +13,7 @@ namespace Location_Info.ViewModels
         public WeatherButton WeatherButton { get { return weatherButton; } set { weatherButton = value; OnPropertyChanged(); } }
         public SportButton SportButton { get { return sportButton; } set { sportButton = value; OnPropertyChanged(); } }
    
-        public LocationInfoPageVM() {
+        public LocationInfoWindowVM() {
 
             WeatherButton = new WeatherButton();
             SportButton = new SportButton();
