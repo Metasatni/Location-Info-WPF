@@ -13,8 +13,8 @@ namespace Location_Info.ViewModels
             var entity = sport.Results[0].Entity;
             var type = sport.Results[2].Type;
 
-            this.Name = entity.Name;
-            this.SportName = entity.Team.Sport.Name;
+            this.Name = entity.Category.Name;
+            this.SportName = entity.Sport.Name;
             this.Type = type;
         }
     }

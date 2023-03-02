@@ -9,10 +9,13 @@ using static Location_Info.Objects.SportObject;
 
 namespace Location_Info.Services
 {
-    class SportApiService
+    public class SportApiService
     {
+        private Database _database = ServiceContainer.GetService<Database>();
+        private string _apiKey = "";
         public async Task<List<Result>> GetSport(string Country)
         {
+            _apiKey = _database.SportApiKey;
             var client = new HttpClient();
             var request = new HttpRequestMessage
             {
@@ -20,7 +23,7 @@ namespace Location_Info.Services
                 RequestUri = new Uri("https://footapi7.p.rapidapi.com/api/search/" + Country),
                 Headers =
                     {
-                        { "X-RapidAPI-Key", "de8248b955mshf55ad42ee395bd3p1a2fdbjsnaf254dd0c985" },
+                        { "X-RapidAPI-Key", _apiKey },
                         { "X-RapidAPI-Host", "footapi7.p.rapidapi.com" },
                     },
             };

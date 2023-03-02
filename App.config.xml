@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<appSettings>
+		<add key="WeatherApiKey" value="4dceb76fd9ea40bb873123657232302"/>
+		<add key="SportApiKey" value="de8248b955mshf55ad42ee395bd3p1a2fdbjsnaf254dd0c985"/>
+		<add key="SportAutoRequest" value="false"/>
+	</appSettings>
+</configuration>

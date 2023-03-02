@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Location_Info.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,17 +14,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Location_Info.ViewModels
+namespace Location_Info.Pages
 {
     /// <summary>
-    /// Interaction logic for Sport.xaml
+    /// Interaction logic for EsportPage.xaml
     /// </summary>
-    public partial class SportPage : Page
+    public partial class EsportPage : Page
     {
-        public SportPage(SportPageVM sportPageVM)
+        public EsportPage(EsportPageVM esportPageVM)
         {
             InitializeComponent();
-            this.DataContext = sportPageVM;
+            this.DataContext = esportPageVM;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

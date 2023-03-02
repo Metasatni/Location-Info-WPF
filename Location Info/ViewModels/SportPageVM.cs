@@ -11,23 +11,25 @@ using static Location_Info.Objects.SportObject;
 
 namespace Location_Info.ViewModels
 {
-    class SportPageVM : ViewModel
+    public class SportPageVM : ViewModel
     {
-        private string _country;
         private ObservableCollection<Result> sportResults;
         private SportApiService _sportApiService;
+        private Database _database => ServiceContainer.GetService<Database>();
         public RootSport rootSport;
         public ObservableCollection<Result> SportResults { get => sportResults; set {sportResults = value; OnPropertyChanged(); } }
 
-        public SportPageVM(string Country)
+        public SportPageVM(SportApiService sportApiService)
         {
-            _sportApiService = new SportApiService();
-            this._country = Country;
-            _ = _sportApiService.GetSport(Country);
+            _sportApiService = sportApiService;
+            RefreshData();
 
         }
+        private async void RefreshData()
+        {
+            var sportResults = await _sportApiService.GetSport(_database.Country); 
+            this.SportResults = new ObservableCollection<Result>(sportResults);
+        }
 
-       
     }
-
 }

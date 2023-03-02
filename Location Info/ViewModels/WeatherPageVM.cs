@@ -1,17 +1,11 @@
-﻿using Location_Info.Buttons;
-using Location_Info.Services;
-using Newtonsoft.Json;
-using System;
+﻿using Location_Info.Services;
 using System.Collections.ObjectModel;
-using System.Net.Http;
-using static Location_Info.Objects.ForecastObject;
-using static Location_Info.Objects.WeatherObject;
 
 namespace Location_Info.ViewModels
 {
     public class WeatherPageVM : ViewModel
     {
-        private Database Database => ServiceContainer.GetService<Database>();
+        private Database _database => ServiceContainer.GetService<Database>();
         private WeatherInfo weatherInfo;
         private ObservableCollection<ForecastInfo> forecastDays;
         private ChartInfo chartVM;
@@ -27,11 +21,11 @@ namespace Location_Info.ViewModels
         }
         private async void RefreshData()
         {
-            this.WeatherInfo = await _weatherApiService.GetWeather(Database.Name);
-            var forecastdays = await _weatherApiService.GetForecast(Database.Name);
+            this.WeatherInfo = await _weatherApiService.GetWeather(_database.Name);
+            var forecastdays = await _weatherApiService.GetForecast(_database.Name);
             this.ForecastDays = new ObservableCollection<ForecastInfo>(forecastdays);
             ChartInfo = new ChartInfo(ForecastDays);
-
+            _database.Country = this.WeatherInfo.Country;
         }
     }
 }

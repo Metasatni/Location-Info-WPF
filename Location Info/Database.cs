@@ -10,8 +10,10 @@ namespace Location_Info
 
         public string Name { get; set; }
         public string Country { get; set; }
-        public WeatherInfo WeatherInfo { get; set; }
-        public ForecastInfo ForecastInfo { get; set; }
+        public string WeatherApiKey { get; set; }
+        public string SportApiKey { get; set; }
+        public string EsportApiKey { get; set; }
+        public bool SportAutoRequest { get; set; }
 
     }
 }

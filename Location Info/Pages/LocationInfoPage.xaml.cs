@@ -1,4 +1,5 @@
-﻿using Location_Info.Services;
+﻿using Location_Info.Pages;
+using Location_Info.Services;
 using System.Windows;
 
 namespace Location_Info.ViewModels
@@ -10,7 +11,8 @@ namespace Location_Info.ViewModels
     public enum EButtons
     {
         Weather,
-        ESport,
+        Sport,
+        Esport,
     }
     public partial class LocationInfoPage : Window
     {
@@ -19,8 +21,10 @@ namespace Location_Info.ViewModels
         private Database Database => ServiceContainer.GetService<Database>();
         private SportPage _sport => (_sportField ??= ServiceContainer.GetService<SportPage>());
         private WeatherPage _weather => (_weatherField ??= ServiceContainer.GetService<WeatherPage>());
+        private EsportPage _esport => (_esportField ??= ServiceContainer.GetService<EsportPage>());
         private WeatherPage _weatherField;
         private SportPage _sportField;
+        private EsportPage _esportField;
         private string _name { get; set; }
         
         public LocationInfoPage()
@@ -37,7 +41,12 @@ namespace Location_Info.ViewModels
         private void SportButton_Click(object sender, RoutedEventArgs e)
         {
             _name = SportButton.Name;
-            if(SportButton.IsEnabled) {CheckButtons(EButtons.ESport);  MainFrame.Content = _sport; }    
+            if(SportButton.IsEnabled) {CheckButtons(EButtons.Sport);  MainFrame.Content = _sport; }    
+        } 
+        private void EsportButton_Click(object sender, RoutedEventArgs e)
+        {
+            _name = EsportButton.Name;
+            if(EsportButton.IsEnabled) {CheckButtons(EButtons.Esport);  MainFrame.Content = _esport; }    
         } 
         private void CheckButtons(EButtons button)
         {
@@ -46,10 +55,17 @@ namespace Location_Info.ViewModels
                 case EButtons.Weather:
                     WeatherButton.IsEnabled = false;
                     SportButton.IsEnabled = true;
+                    EsportButton.IsEnabled = true;
                     break;
-                case EButtons.ESport:
+                case EButtons.Sport:
                     WeatherButton.IsEnabled = true;
                     SportButton.IsEnabled = false;
+                    EsportButton.IsEnabled = true;
+                    break;
+                case EButtons.Esport:
+                    WeatherButton.IsEnabled = true;
+                    SportButton.IsEnabled = true;
+                    EsportButton.IsEnabled = false;
                     break;
 
             }

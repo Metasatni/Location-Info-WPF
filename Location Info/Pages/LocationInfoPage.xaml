@@ -28,7 +28,7 @@
                 <StackPanel Margin="50,10,0,10" Grid.Row="0" Orientation="Horizontal">
                     <Button x:Name="WeatherButton" Width="100" Height="35" Content="Weather" Margin="0" IsEnabled="{Binding WeatherButton.IsEnabled, UpdateSourceTrigger=PropertyChanged}" Click="WeatherButton_Click" />
                     <Button x:Name="SportButton" Width="100" Height="35" Content="Sport" Margin="10,0,0,0" IsEnabled="{Binding SportButton.IsEnabled, UpdateSourceTrigger=PropertyChanged}" Click="SportButton_Click" />
-                    <Button x:Name="PeopleBT" Width="100" Height="35" Content="People" Margin="10,0,0,0" />
+                    <Button x:Name="EsportButton" Width="100" Height="35" Content="People" Margin="10,0,0,0" IsEnabled="{Binding EportButton.IsEnabled, UpdateSourceTrigger=PropertyChanged}" Click="EsportButton_Click" />
                 </StackPanel>
             </Border>
                     <!--ContentVM-->

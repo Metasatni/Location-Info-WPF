@@ -11,11 +11,13 @@ namespace Location_Info.Services
 {
     public class WeatherApiService
     {
-        private string ApiKey = "4dceb76fd9ea40bb873123657232302";
+        private Database _database => ServiceContainer.GetService<Database>();
+        private string _apiKey ="";
         public async Task<List<ForecastInfo>> GetForecast(string Name)
         {
+            _apiKey = _database.WeatherApiKey; 
             HttpClient httpClient = new HttpClient();
-            string url = "http://api.weatherapi.com/v1/forecast.json?key=" + ApiKey + "&q=" + Name + "&days=3" + " & aqi=no" + "&alers=no";
+            string url = "http://api.weatherapi.com/v1/forecast.json?key=" + _apiKey + "&q=" + Name + "&days=3" + " & aqi=no" + "&alers=no";
             try
             {
                 var response = await httpClient.GetStringAsync(url);
@@ -35,7 +37,8 @@ namespace Location_Info.Services
         public async Task <WeatherInfo> GetWeather(string Name)
         {
             HttpClient httpClient = new HttpClient();
-            string url = "http://api.weatherapi.com/v1/current.json?key=" + ApiKey + "&q=" + Name + "&aqi=no";
+            _apiKey = _database.WeatherApiKey;
+            string url = "http://api.weatherapi.com/v1/current.json?key=" + _apiKey + "&q=" + Name + "&aqi=no";
             try
             {
                 var response = await httpClient.GetStringAsync(url);

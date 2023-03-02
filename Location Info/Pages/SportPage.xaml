@@ -9,32 +9,49 @@
       Title="Sport">
 
     <Grid>
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="0">
 
             <!-- Sports -->
 
             <Label Content="Sports" FontSize="24" HorizontalAlignment="Center" Grid.ColumnSpan="2" />
-            <Grid Grid.Row="0">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-
-                <ListView Grid.Row="6" SelectedIndex="0" ItemsSource="{Binding SportResults}"
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="200" TextAlignment="Center" Text="Name" VerticalAlignment="Center"/>
+                    <TextBlock Width="200" TextAlignment="Center" Text="Name code" VerticalAlignment="Center"/>
+                    <TextBlock Width="200" TextAlignment="Center" Text="Sport name" VerticalAlignment="Center"/>
+                    <TextBlock Width="200" TextAlignment="Center" Text="Type" VerticalAlignment="Center"/>
+                    <TextBlock Width="200" TextAlignment="Center" Text="National" VerticalAlignment="Center"/>
+                    <TextBlock Width="200" TextAlignment="Center" Text="Score" VerticalAlignment="Center"/>
+                    <TextBlock Width="160" TextAlignment="Center" Text="TeamColors" VerticalAlignment="Center"/>
+                </StackPanel>
+                <ListView Grid.Row="1" SelectedIndex="0" ItemsSource="{Binding SportResults}"
                     Height="Auto" x:Name="lsvSportResults">
+
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock TextAlignment="Center" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
-                                    <TextBlock Margin="10,0,0,0" TextAlignment="Center" Text="{Binding SportName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
-                                    <TextBlock Margin="10,0,0,0" TextAlignment="Center" Text="{Binding Type, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
-                                </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="200" TextAlignment="Center" Text="{Binding Entity.Name, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                                <TextBlock Width="200" TextAlignment="Center" Text="{Binding Entity.NameCode, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                                <TextBlock Width="200" TextAlignment="Center" Text="{Binding Entity.Sport.Name, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                                <TextBlock Width="200" TextAlignment="Center" Text="{Binding Type, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                                <TextBlock Width="200" TextAlignment="Center" Text="{Binding Entity.National, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                                <TextBlock Width="200" TextAlignment="Center" Text="{Binding Score, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                                <Canvas Width="80" Height="15" Background="{Binding Entity.TeamColors.Primary}"/>
+                                <Canvas Width="80" Height="15" Background="{Binding Entity.TeamColors.Secondary}"/>
+                            </StackPanel>
+
                             </DataTemplate>
+
                         </ListView.ItemTemplate>
+
                     </ListView>
 
                </Grid>
