@@ -15,7 +15,6 @@
         <StackPanel Grid.Row="0">
 
             <!-- Esport -->
-
             <Label Content="E-Sport" FontSize="24" HorizontalAlignment="Center" Grid.ColumnSpan="2" />
             <Grid>
                 <Grid.RowDefinitions>
@@ -39,6 +38,7 @@
                   MaxHeight="600" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="Name"/>
+                        <DataGridTextColumn Width="*" Binding="{Binding IsLive}" Header="IsLive"/>
                         <DataGridTextColumn Width="*" Binding="{Binding GameName}" Header="Game"/>
                         <DataGridTemplateColumn Width="*" Header="Logo"
                                              IsReadOnly="True">

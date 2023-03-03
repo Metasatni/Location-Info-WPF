@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using static Location_Info.Objects.CountryCodeObject;
+using static Location_Info.Objects.EsportMatchesObject;
 using static Location_Info.Objects.EsportObject;
 
 namespace Location_Info.Services
@@ -17,12 +18,12 @@ namespace Location_Info.Services
         private Database _database = ServiceContainer.GetService<Database>();
         private string _apiKey = "";
 
-        public async Task<List<EsportInfo>> GetEsport(string Country)
+        public async Task<List<EsportInfo>> GetEsportTeams(string Country)
         {
             _apiKey = _database.EsportApiKey; 
             string country = GetCountryCode(Country);
             HttpClient httpClient = new HttpClient();
-            string url = "https://api.pandascore.co/teams?search[location]="+ country +"&sort=acronym&page=1&per_page=200&token="+ _apiKey;
+            string url = "https://api.pandascore.co/teams?search[location]="+ country +"&sort=acronym&page=1&per_page=500&token="+ _apiKey;
             try
             {
                 var response = await httpClient.GetStringAsync(url);
@@ -33,6 +34,24 @@ namespace Location_Info.Services
             catch (Exception ex)
             {
                 return new List<EsportInfo>();
+            }
+        }
+        public async Task<List<EsportMatchesInfo>> GetEsportCurrentMatches()
+        {
+            _apiKey = _database.EsportApiKey;
+            HttpClient httpClient = new HttpClient();
+            string url = "https://api.pandascore.co/matches?search[status]=running&sort=&page=1&per_page=500&token=" + _apiKey;
+            try
+            {
+                var response = await httpClient.GetStringAsync(url);
+                var rootEsportMatches = JsonConvert.DeserializeObject<List<EsportMatchesRoot>>(response);
+                var esportMatchesInfo = rootEsportMatches.Select(x => new EsportMatchesInfo(x)).ToList();
+
+                return esportMatchesInfo;
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
         public string GetCountryCode(string Country)
