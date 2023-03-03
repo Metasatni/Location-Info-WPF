@@ -60,8 +60,11 @@ namespace Location_Info.Services
             {
                 string json = r.ReadToEnd();
                 List<CountryCodeRoot> codes = JsonConvert.DeserializeObject<List<CountryCodeRoot>>(json);
-                var code = codes.Find(x => x.Name == Country).Code;
-                return code; 
+                if (codes?.Find(x => x.Name == Country).Code != null)
+                {
+                    return codes.Find(x=>x.Name == Country).Code;
+                }
+                return "US"; 
             }
         }
     }

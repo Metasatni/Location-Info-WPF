@@ -14,13 +14,15 @@ namespace Location_Info.Info
         public string Slug { get; set; }
         public DateTime Updated { get; set; }
         public ImageSource Ico { get; set; }
-        public bool IsLive { get; set; }
+        public string IsLive { get; set; }
+        public string Stream { get; set; }
         public List<PlayerInfo> Players { get; set; }
         public EsportInfo(RootEsport rootEsport)
         {
 
             var converter = new ImageSourceConverter();
             this.Name = rootEsport.Name;
+            this.IsLive = "Collapsed";
             this.Slug = rootEsport.Slug;
             this.GameName = rootEsport.CurrentVideogame.Name;
             this.Players = rootEsport.Players.Select(x => new PlayerInfo(x)).ToList();

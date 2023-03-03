@@ -9,7 +9,39 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EsportPage">
     <Page.Resources>
-        <converters:CountToEnabledConverter x:Key="CountToEnabledConverter" />
+        <converters:CountToEnabledConverter x:Key="CountToEnabledConverter"/>
+        <Style x:Key="LiveStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#373737" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <Path x:Name="PathIcon" Width="15" Height="20" Stretch="Fill" Fill="White" HorizontalAlignment="Left" Margin="10,2,2,2" Data="F1 M 30.0833,
+                                      22.1667L 50.6665,37.6043L 50.6665,38.7918L 30.0833,53.8333L 30.0833,22.1667 Z "/>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="17,0,0,0" />
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter TargetName="PathIcon" Property="Fill" Value="Black" />
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="OrangeRed" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     <Grid>
         <StackPanel Grid.Row="0">
@@ -38,7 +70,6 @@
                   MaxHeight="600" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="Name"/>
-                        <DataGridTextColumn Width="*" Binding="{Binding IsLive}" Header="IsLive"/>
                         <DataGridTextColumn Width="*" Binding="{Binding GameName}" Header="Game"/>
                         <DataGridTemplateColumn Width="*" Header="Logo"
                                              IsReadOnly="True">
@@ -49,14 +80,21 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Width="*" Binding="{Binding Updated}" Header="Updated"/>
+                             <DataGridTemplateColumn Width="80" Header=""
+                                                 IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Click="IsLiveButton_Click" Style="{StaticResource LiveStyle}" Content="LIVE" Background="Red"
+                                                Visibility="{Binding IsLive, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         <DataGridTemplateColumn Width="*" Header=""
                                              IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Click="Button_Click" Content="View Players"
-                                            IsEnabled="{Binding Players.Count,
-                                        Converter={StaticResource CountToEnabledConverter}}" />
-
+                                            IsEnabled="{Binding Players.Count }" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

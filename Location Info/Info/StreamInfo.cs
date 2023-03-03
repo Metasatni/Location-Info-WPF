@@ -9,7 +9,7 @@ namespace Location_Info.Info
 {
     public class StreamInfo
     {
-        string StreamUrl { get; set; }
+        public string StreamUrl { get; set; }
         public StreamInfo(StreamsList streamsList)
         {
             this.StreamUrl = streamsList.RawUrl;
