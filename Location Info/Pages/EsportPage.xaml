@@ -21,9 +21,11 @@
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border CornerRadius="4" Background="{TemplateBinding Background}">
                             <Grid>
-                                <Path x:Name="PathIcon" Width="15" Height="20" Stretch="Fill" Fill="White" HorizontalAlignment="Left" Margin="10,2,2,2" Data="F1 M 30.0833,
+                                <Path x:Name="PathIcon" Width="15" Height="20" Stretch="Fill" Fill="White"
+                                      HorizontalAlignment="Left" Margin="10,2,2,2" Data="F1 M 30.0833,
                                       22.1667L 50.6665,37.6043L 50.6665,38.7918L 30.0833,53.8333L 30.0833,22.1667 Z "/>
-                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="17,0,0,0" />
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}"
+                                                  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="17,0,0,0" />
                             </Grid>
                         </Border>
 
@@ -66,7 +68,8 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
 
-                <DataGrid Background="#E7E7E7" AlternatingRowBackground="#E7E7E7" RowBackground="#C8C8C8" IsReadOnly="true" ItemsSource="{Binding EsportInfo}"
+                <DataGrid Background="#E7E7E7" AlternatingRowBackground="#E7E7E7" RowBackground="#C8C8C8" IsReadOnly="true"
+                          ItemsSource="{Binding EsportInfo,UpdateSourceTrigger=PropertyChanged}"
                   MaxHeight="600" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="Name"/>
@@ -85,11 +88,11 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Click="IsLiveButton_Click" Style="{StaticResource LiveStyle}" Content="LIVE" Background="Red"
-                                                Visibility="{Binding IsLive, UpdateSourceTrigger=PropertyChanged}"/>
+                                                Visibility="{Binding IsLive}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="*" Header=""
+                        <DataGridTemplateColumn Width="120" Header=""
                                              IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

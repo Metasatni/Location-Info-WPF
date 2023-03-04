@@ -1,5 +1,6 @@
 ﻿using Location_Info.Pages;
 using Location_Info.Services;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace Location_Info.ViewModels

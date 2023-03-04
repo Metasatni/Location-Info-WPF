@@ -22,29 +22,32 @@ namespace Location_Info.ViewModels
         public EsportPageVM(EsportApiService esportApiService)
         {
             _esportApiService = esportApiService;
-            RefreshData();
+            RefreshData("All");
+            _database.DataChanged += RefreshData;
         }
 
-        private async void RefreshData()
+        private async void RefreshData(string datatype)
         {
-            var esportMatchesInfo = await _esportApiService.GetEsportCurrentMatches();
-            this.EsportMatchesInfo = esportMatchesInfo;
-            var esportInfo = await _esportApiService.GetEsportTeams(_database.Country);
-            this.EsportInfo = new ObservableCollection<EsportInfo>(esportInfo.OrderByDescending(x => x.Updated));
-            foreach (var matches in EsportMatchesInfo)
+            switch (datatype)
             {
-                foreach (var team in EsportInfo)
-                {
-                    if (team.Slug == matches.Slug)
-                    {
-                        team.Stream = matches.StreamUrl[0].StreamUrl;
-                        team.IsLive = "Visible";
-                    }
-                }
+                case "All":
+                    this.PlayerInfo = _database.PlayerInfo;
+                    this.EsportInfo = _database.EsportInfo;
+                    this.EsportMatchesInfo = _database.EsportMatchesInfo;
+                    break;
+                case "EsportMatchesInfo":
+                    this.EsportMatchesInfo = _database.EsportMatchesInfo;
+                    break;
+                case "EsportInfo":
+                    this.EsportInfo = _database.EsportInfo;
+                    break;
+                case "PlayerInfo":
+                    this.PlayerInfo = _database.PlayerInfo;
+                    break;
+
             }
-            var players = this.EsportInfo.SelectMany(info => info.Players);
-            this.PlayerInfo = new ObservableCollection<PlayerInfo>(players);
-            _database.EsportInfo = this.EsportInfo;
+
         }
+
     }
 }

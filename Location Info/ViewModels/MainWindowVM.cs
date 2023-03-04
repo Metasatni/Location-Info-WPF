@@ -30,7 +30,7 @@ namespace Location_Info
             if(Name.Length <= 1) { return; }
             _weatherApiService = new WeatherApiService();
             Database.Name = Name;
-            var response = _weatherApiService.GetWeather(Name);
+            var response = await _weatherApiService.GetWeather(Name);
             if(response != null) { LocationInfoWindow locationInfoPage = new LocationInfoWindow(); locationInfoPage.Show(); }
         }
     }

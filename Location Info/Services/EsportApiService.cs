@@ -23,18 +23,25 @@ namespace Location_Info.Services
             _apiKey = _database.EsportApiKey; 
             string country = GetCountryCode(Country);
             HttpClient httpClient = new HttpClient();
-            string url = "https://api.pandascore.co/teams?search[location]="+ country +"&sort=acronym&page=1&per_page=500&token="+ _apiKey;
-            try
+            var rootesport = new List<RootEsport>();
+            for(int i =  1; i < 10; i++)
             {
-                var response = await httpClient.GetStringAsync(url);
-
-                var rootesport = JsonConvert.DeserializeObject<List<RootEsport>>(response);
-                return rootesport.Select(x => new EsportInfo(x)).ToList();
+                string url = "https://api.pandascore.co/teams?search[location]="+ country +"&sort=acronym&page=" + i + "&per_page=100&token="+ _apiKey;
+                try
+                {
+                    var response = await httpClient.GetStringAsync(url);
+                    var converted = JsonConvert.DeserializeObject<List<RootEsport>>(response);
+                    rootesport.AddRange(converted); 
+                    if(rootesport.Count %100 != 0){
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return new List<EsportInfo>();
+                }
             }
-            catch (Exception ex)
-            {
-                return new List<EsportInfo>();
-            }
+            return rootesport.Select(x => new EsportInfo(x)).ToList();
         }
         public async Task<List<EsportMatchesInfo>> GetEsportCurrentMatches()
         {
@@ -60,7 +67,7 @@ namespace Location_Info.Services
             {
                 string json = r.ReadToEnd();
                 List<CountryCodeRoot> codes = JsonConvert.DeserializeObject<List<CountryCodeRoot>>(json);
-                if (codes?.Find(x => x.Name == Country).Code != null)
+                if (codes?.Find(x => x.Name == Country)?.Code != null)
                 {
                     return codes.Find(x=>x.Name == Country).Code;
                 }
