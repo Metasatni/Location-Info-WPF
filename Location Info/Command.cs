@@ -7,6 +7,7 @@ internal class Command : ICommand {
 
   private readonly Action<object?> _execute;
   private readonly Func<object?, bool>? _canExecute;
+    private ICommand? firstSite;
 
     public event EventHandler? CanExecuteChanged {
     add { CommandManager.RequerySuggested += value; }
@@ -17,6 +18,11 @@ internal class Command : ICommand {
     _execute = execute;
     _canExecute = canExecute;
   }
+
+    public Command(ICommand? firstSite)
+    {
+        this.firstSite = firstSite;
+    }
 
     public bool CanExecute(object? parameter) {
     if (_canExecute is null) return true;

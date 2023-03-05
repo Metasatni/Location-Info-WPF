@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Location_Info.Pages"
       xmlns:converters="clr-namespace:Location_Info.Converters"
+      xmlns:mvvm="clr-namespace:MvvmEventBinding;assembly=MvvmEventBinding"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EsportPage">
@@ -50,6 +51,56 @@
 
             <!-- Esport -->
             <Label Content="E-Sport" FontSize="24" HorizontalAlignment="Center" Grid.ColumnSpan="2" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Command="{Binding FirstSiteCommand}" Grid.Column="0" Content="&lt;&lt;"/>
+                <Button Command="{Binding PreviousSiteCommand}"  Grid.Column="1" Content="&lt;"/>
+                <Button Grid.Column="2" Content="{Binding SiteOfSites}"/>
+                <Button Command="{Binding NextSiteCommand}" Grid.Column="3" Content=">"/>
+                <Button Command="{Binding LastSiteCommand}" Grid.Column="4" Content=">>"/>
+                <ComboBox Grid.Column="5" SelectionChanged="{mvvm:EventBinding SortCommand}">
+            
+                    <ComboBoxItem Tag="SortBy" IsSelected="True" IsEnabled="False">
+                        <TextBlock Text="Sort by"/>
+                    </ComboBoxItem>
+
+                    <ComboBoxItem Tag="Name (A-Z)">
+                        <TextBlock Text="Name (A-Z)"/>
+                    </ComboBoxItem>
+
+                    <ComboBoxItem Tag="Name (Z-A)">
+                        <TextBlock Text="Name (Z-A)"/>
+                    </ComboBoxItem>
+
+                    <ComboBoxItem Tag="Game (A-Z)">
+                        <TextBlock Text="Game (A-Z)"/>
+                    </ComboBoxItem>
+
+                    <ComboBoxItem Tag="Game (Z-A)">
+                        <TextBlock Text="Game (Z-A)"/>
+                    </ComboBoxItem>
+
+                    <ComboBoxItem Tag="Updated (newest)">
+                        <TextBlock Text="Updated (newest)"/>
+                    </ComboBoxItem>
+
+                    <ComboBoxItem Tag="Updated (oldest)">
+                        <TextBlock Text="Updated (oldest)"/>
+                    </ComboBoxItem>
+                </ComboBox>
+
+            </Grid>
+
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -68,8 +119,9 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
 
+                
                 <DataGrid Background="#E7E7E7" AlternatingRowBackground="#E7E7E7" RowBackground="#C8C8C8" IsReadOnly="true"
-                          ItemsSource="{Binding EsportInfo,UpdateSourceTrigger=PropertyChanged}"
+                          ItemsSource="{Binding PartiedEsportInfo,UpdateSourceTrigger=PropertyChanged}"
                   MaxHeight="600" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="Name"/>

@@ -35,7 +35,9 @@ namespace Location_Info.Services
                     var stringresponse = await response.Content.ReadAsStringAsync();
                     var rootSport = JsonConvert.DeserializeObject<RootSport>(stringresponse);
 
-                    var SportResults = new List<Result>();
+                    if(rootSport != null)
+                    {
+                       var SportResults = new List<Result>();
 
                     foreach (var result in rootSport.Results)
                     {
@@ -44,6 +46,8 @@ namespace Location_Info.Services
 
                     return SportResults;
 
+                    }
+                return new List<Result>(); 
                 }
             }
             catch (Exception ex)
